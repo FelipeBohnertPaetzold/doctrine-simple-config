@@ -1,0 +1,21 @@
+version: '3.7'
+
+services: 
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: php -S 0.0.0.0 :8000 -t public public/index.php
+  db:
+    image: mariadb:10
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: example
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
